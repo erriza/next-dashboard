@@ -10,11 +10,13 @@ import { ArrowRightIcon } from '@heroicons/react/20/solid';
 import { Button } from './button';
 import { useFormState, useFormStatus } from 'react-dom';
 import { authenticate } from '../lib/actions';
+import { useEffect, useState } from 'react';
 
 export default function LoginForm() {
   const [errorMessage, dispatch] = useFormState(authenticate, undefined);
 
   return (
+    <div>
     <form action={dispatch} className="space-y-3">
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
         <h1 className={`${lusitana.className} mb-3 text-2xl`}>
@@ -76,6 +78,10 @@ export default function LoginForm() {
         </div>
       </div>
     </form>
+    <div className='flex justify-center align-middle'>
+      <DelayedComponent/>
+    </div>
+    </div>
   );
 }
 
@@ -88,3 +94,45 @@ function LoginButton() {
     </Button>
   );
 }
+
+function PasswordSecret () {
+  const [isVisible, setIsVisible] = useState(false);
+
+  function handleOpen() {
+    setIsVisible(!isVisible);
+  }
+
+  return(
+    <div className='flex justify-center items-center flex-col p-4'>
+      {
+      !isVisible ? 
+        <div className='flex justify-center items-center flex-col '>
+          <p className='p-2 text-center'>Whant to know a secret?</p>
+          <Button onClick={handleOpen} className='text-center'>
+            Open seasame
+          </Button> 
+        </div>
+        : 
+        <div className='flex bg-slate-100 p-4 rounded-md justify-center flex-col align-items-center'>
+          <p className='p-2'>email: user@nextmail.com</p>
+          <p className='p-2'>password: 123456</p>
+          <Button onClick={handleOpen} className='text-center'>Hide shhhh</Button>
+        </div>
+      }
+    </div>
+  );
+}
+
+const DelayedComponent = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  return isVisible ? <PasswordSecret/> : null;
+};
