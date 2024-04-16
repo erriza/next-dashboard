@@ -20,7 +20,6 @@ input[type='number']::-webkit-outer-spin-button {
 /* For slinding window */
 .container {
   display: flex;
-  width: 90vw;
 }
 
 .panel {
