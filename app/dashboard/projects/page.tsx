@@ -1,22 +1,22 @@
 'use client';
 
 import {
-  UserGroupIcon,
-  HomeIcon,
-  DocumentDuplicateIcon,
+  WindowIcon,
+  ComputerDesktopIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
-import { UserCircleIcon } from '@heroicons/react/20/solid';
 
 export default function Page() {
     const links = [
-        { name: 'Sliding Windows', href: '/dashboard/projects/slidingwindows', icon: UserCircleIcon},
+        { name: 'Sliding Windows', 
+          href: '/dashboard/projects/slidingwindows', 
+          icon: WindowIcon},
         {
-          name: 'Rotatin Navigation',
+          name: 'Parallax Page',
           href: '/dashboard/projects/rotatingnavigation',
-          icon: DocumentDuplicateIcon,
+          icon: ComputerDesktopIcon,
         },
 
       ];
